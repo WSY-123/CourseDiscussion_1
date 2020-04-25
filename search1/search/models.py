@@ -22,6 +22,7 @@ class feedback(models.Model):
     title = models.CharField(max_length=20)       #标题
     text = models.TextField()                      #内容
     date_added = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         """返回反馈的字段显示"""
         return self.title

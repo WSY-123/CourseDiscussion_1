@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 def index(request):
     """搜索主页"""
-    return render(request, 'search/search.html')
+    return render(request, 'search/index.html')
 
 def feedback(request):
     """提交反馈"""
@@ -17,7 +17,6 @@ def feedback(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('search:search'))
+            return render(request, 'search/succeed.html')
     context = {'form': form}
     return render(request, 'search/feedback.html', context)
-

@@ -1,19 +1,65 @@
 <!DOCTYPE html>
-<html lang="ch">
-    <head>
-        <meta charset="UTF-8">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <title>搜索</title>
-    </head>
-    <body>
-        <div class="search-box">
-             <input class="search-txt" type="text" name="" placeholder="点击此处搜索">
-             <a class="search-btn" href="#">
-             <i class="fas fa-search"></i>
-             </a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程列表</title>
+</head>
+<body>
+{% load highlight %}
+
+
+{% block content %}
+    <div class="col-md-9">
+    <div class="row text-center vertical-middle-sm">
+        <h1>搜索结果</h1>
+    </div>
+　　{# 如果存在搜索关键字 #}
+    {% if query %}
+        {% for result in page.object_list %}<div class="media">
+            <a href="{{  result.object.get_absolute_url }}" class="list-group-item active">
+                    {% if result.object.avatar %}
+                        <div class="media-left">
+                            <img src="{{  result.object.avatar.url }}" alt="avatar" style="max-width: 100px; border-radius: 20px">
+                        </div>
+            {% endif %}
+                <div class="media-body">
+                    <h4 class="list-group-item-heading">课程名：{{ result.object.name }}</h4>
+                    <p class="list-group-item-text">学分：{{ result.object.credit }}</p>
+                    <p class="list-group-item-text">教师：{{ result.object.teacher }}</p>
+                    <p class="list-group-item-text">学院：{{ result.object.institute}}</p>
+                    <p class="list-group-item-text">开课学年：{{ result.object.semester }}</p>
+                    <p class="list-group-item-text">上课时间：{{ result.object.time }}</p>
+                    <p class="list-group-item-text">上课周次：{{ result.object.weeks }}</p>
+                    <p class="list-group-item-text">上课地点：{{ result.object.location }}</p>
+                </div>
+            </a>
         </div>
-        <p>
+            {% empty %}
+            <h3>没有找到相关课程</h3>
+        {% endfor %}
+    {% endif %}
+
+{#        {% include 'paginator.html' %}#}
+
+{#    分页插件，下一页和上一页记得要带上q={{ query }}参数，否则单击下一页时会丢失搜索参数q，而显示出来全部的课程的第二页#}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?q={{ query }}&page={{ page.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            Page{{ page.number }} of {{ page.paginator.num_pages }}
+        </span>
+
+        {% if page.has_next %}
+            <a href="?q={{ query }}&page={{ page.next_page_number }}">下一页</a>
+        {% endif %}
+    </span>
+    <p>
             <a href="{% url 'search:feedback' %} ">反馈</a>
-        </p>
-    </body>
+    </p>
+</div></div>
+{% endblock %}
+</body>
 </html>

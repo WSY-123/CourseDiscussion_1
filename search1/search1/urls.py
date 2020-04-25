@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 app_name='search'
 urlpatterns = [
-    path('search/', include('search.urls'), name='search'),
+
+    path('', include('search.urls'), name='search'),
     path('admin/', admin.site.urls),
 ]
