@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-app_name='search'
+app_name = 'search'
 urlpatterns = [
 
     path('', include('search.urls'), name='search'),
