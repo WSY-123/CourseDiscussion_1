@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import FeedbackForm
+from .models import lessons
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 # Create your views here.
@@ -20,3 +21,8 @@ def feedback(request):
             return render(request, 'search/succeed.html')
     context = {'form': form}
     return render(request, 'search/feedback.html', context)
+
+def show(request):
+    """显示筛选页面"""
+    list = lessons.objects.all()
+    return render (request, 'search/show.html', )
