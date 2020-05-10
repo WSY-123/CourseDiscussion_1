@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="81f788ff-6aa3-4059-80b6-5ba2d390a091" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="81f788ff-6aa3-4059-80b6-5ba2d390a091" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,7 +169,7 @@
       <workItem from="1589101723130" duration="1760000" />
       <workItem from="1589104093324" duration="496000" />
       <workItem from="1589119545750" duration="1186000" />
-      <workItem from="1589120827162" duration="518000" />
+      <workItem from="1589120827162" duration="739000" />
     </task>
     <task id="LOCAL-00001" summary="实现了全局搜索功能，并对反馈和课程功能添加了修改">
       <created>1587813511971</created>
@@ -222,11 +220,28 @@
       <option name="project" value="LOCAL" />
       <updated>1589120984130</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="完成了注册和登录功能">
+      <created>1589121389931</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1589121389931</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
