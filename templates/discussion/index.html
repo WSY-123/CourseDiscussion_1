@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Discussion{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+           <nav class="navbar bg-light">
+             <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'discuss:index' %}">最新问题</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'discuss:tags_page' %}">问题分类</a>
+                </li>
+             </ul>
+           </nav>
+        </div>
+          <div class="col-10">
+              <div class="container">
+    <div class="row">
+        <div class="col-8"><div class="page-header"><h1>New Questions</h1></div></div>
+        <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
+    </div>
+    </div>
+
+    <table class="table">
+    <tr>
+        <th>Question</th>
+        <th>Votes</th>
+        <th>Answers</th>
+        <th>Views</th>
+    </tr>
+    {% for question in questions %}
+        <tr>
+            <td>
+                <a href="{% url 'discuss:question_details' question.id %}">{{ question.title }}</a><br>
+                {% for tag in question.tags.all %}
+                <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
+                    {% endfor %}
+            </td>
+            <td>{{ question.votes }}</td>
+            <td>{{ question.answers.count }}</td>
+            <td>{{ question.views }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+          </div>
+      </div>
+    </div>
+
+
+{% endblock %}
