@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Discussion{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+           <nav class="navbar bg-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'discuss:index' %}">最新问题</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'discuss:tags_page' %}">问题分类</a>
+                </li>
+            </ul>
+
+            </nav>
+        </div>
+          <div class="col-10">
+              <div class="container">
+                <h1>标签</h1>
+
+                {% for tag in tags %}
+                    <div class="card w-50">
+                        <div class="card-header"><a href="{% url 'discuss:tag_questions' tag.id %}">{{ tag.name }}</a></div>
+                        <div class="card-body">
+                            <p class="card-text">{{ tag.questions.count }} 个问题</p>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+             
+              </div>
+          </div>
+      </div>
+    </div>
+{% endblock %}
