@@ -4,7 +4,6 @@ _pycache__/
 *.py[cod]
 *$py.class
 
-/venv/pyvenv.cfg
 .Python
 .idea/
 
