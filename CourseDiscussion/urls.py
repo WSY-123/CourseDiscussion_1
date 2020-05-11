@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
-app_name = 'search'
+
 urlpatterns = [
+    path('', include('home.urls'), name='home'),
+    path('search/', include('search.urls'), name='search'),
     path('discussion/', include('discussion.urls'), name='discussion'),
-    path('', include('search.urls'), name='search'),
     path('users/', include('users.urls'), name='users'),
     path('admin/', admin.site.urls),
     url(r'^captcha/', include('captcha.urls')),

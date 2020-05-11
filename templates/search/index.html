@@ -3,12 +3,12 @@
 {% block title %}搜索{% endblock %}
 
 {% block content %}
-    <p>
+    <li>
         <form action="{% url 'search:haystack_search' %}" method="get">
             <input type="text" name="q" placeholder="请输入关键字">
             <input type="submit" id="search" value="搜索">
         </form>
-    </p>
+    </li>
 
     <a href="{% url 'search:feedback' %} " class="btn btn-primary">提交反馈</a>
 

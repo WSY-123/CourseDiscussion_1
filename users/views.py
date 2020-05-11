@@ -4,22 +4,25 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
 from .forms import UserForm
 from django.contrib.auth.forms import UserCreationForm
-from . forms import UserForm
+from .forms import UserForm
 from . import models
+
+
 # Create your views here.
 def logout(request):
     """注销账户"""
     if not request.session.get('is_login', None):
         # 如果本来就未登录
-        return HttpResponseRedirect(reverse('search:index'))
+        return HttpResponseRedirect(reverse('home:homepage'))
     request.session.flush()
-    return HttpResponseRedirect(reverse('search:index'))
+    return HttpResponseRedirect(reverse('home:homepage'))
+
 
 def register(request):
     """注册新用户"""
     if request.session.get('is_login', None):
         # 登录状态不允许注册
-        HttpResponseRedirect(reverse('search:index'))
+        HttpResponseRedirect(reverse('home:homepage'))
     if request.method == "POST":
         register_form = models.RegisterForm(request.POST)
         message = "请检查填写的内容！"
@@ -54,9 +57,10 @@ def register(request):
     register_form = models.RegisterForm()
     return render(request, 'users/register.html', locals())
 
+
 def login(request):
     if request.session.get('is_login', None):
-        return HttpResponseRedirect(reverse('search:index'))
+        return HttpResponseRedirect(reverse('home:homepage'))
 
     if request.method == "POST":
         login_form = UserForm(request.POST)
@@ -70,7 +74,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
-                    return HttpResponseRedirect(reverse('search:index'))
+                    return HttpResponseRedirect(reverse('home:homepage'))
                 else:
                     message = "密码不正确！"
             except:
