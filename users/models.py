@@ -29,7 +29,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     sex = models.CharField(max_length=32, choices=gender, default='男')
     c_time = models.DateTimeField(auto_now_add=True)
-    mylessons = models.ManyToManyField('search.lessons',related_name='myusers')
+    mylessons = models.ManyToManyField('search.lessons', related_name='myusers')
 
     def __str__(self):
         return self.name

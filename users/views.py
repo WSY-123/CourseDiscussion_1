@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from oauth2_provider.views.generic import ProtectedResourceView
 from django.http import HttpResponse
@@ -32,7 +32,7 @@ def register(request):
     if request.method == "POST":
         register_form = models.RegisterForm(request.POST)
         message = "请检查填写的内容！"
-        if register_form.is_valid():  # 获取数据
+        if not register_form.is_valid():  # 获取数据
             username = register_form.cleaned_data['username']
             password1 = register_form.cleaned_data['password1']
             password2 = register_form.cleaned_data['password2']
@@ -59,19 +59,22 @@ def register(request):
                 new_user.sex = sex
                 new_user.institute = institute
                 new_user.save()
-                return HttpResponseRedirect(reverse('users:users/login'))  # 自动跳转到登录页面
+                return redirect('users:users/login')  # 自动跳转到登录页面
     register_form = models.RegisterForm()
     return render(request, 'users/register.html', locals())
 
 
 def login(request):
     if request.session.get('is_login', None):
-        return HttpResponseRedirect(reverse('home:homepage'))
+        return redirect('home:homepage')
 
-    if request.method == "POST":
+    login_form = UserForm()
+    if request.method != 'POST':
+        print('1')
+    else:
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
-        if login_form.is_valid():
+        if not login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             try:
@@ -80,14 +83,13 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
-                    return HttpResponseRedirect(reverse('home:homepage'))
+                    return redirect('home:homepage')
                 else:
                     message = "密码不正确！"
             except:
                 message = "用户不存在！"
         return render(request, 'users/login.html', locals())
 
-    login_form = UserForm()
     return render(request, 'users/login.html', locals())
 
 def process(request):
