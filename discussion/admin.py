@@ -1,5 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
+
 from .import models
 
 class Question_admin(admin.ModelAdmin):
@@ -22,10 +22,4 @@ admin.site.register(models.Tag)
 admin.site.register(models.Question,Question_admin)
 admin.site.register(models.Answer,Anwser_admin)
 admin.site.register(models.Comment,Comment_admin)
-=======
-from .models import Tag, Question, Answer, Comment
 
-# Register your models here.
-admin.site.register(Tag)
-admin.site.register(Question)
->>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49

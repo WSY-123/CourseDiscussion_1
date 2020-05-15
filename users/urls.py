@@ -8,8 +8,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
-<<<<<<< HEAD
     path('process/', views.process, name='process'),
-=======
->>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
+
 ]

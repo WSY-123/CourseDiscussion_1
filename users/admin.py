@@ -1,5 +1,4 @@
 from django.contrib import admin
-<<<<<<< HEAD
 from .import models
 
 class User_admin(admin.ModelAdmin):
@@ -10,10 +9,5 @@ class User_admin(admin.ModelAdmin):
 # Register your models here.
 
 admin.site.register(models.User,User_admin)
-=======
 from users.models import User
 
-# Register your models here.
-
-admin.site.register(User)
->>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
