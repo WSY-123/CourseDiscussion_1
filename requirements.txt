@@ -26,3 +26,5 @@ six==1.14.0
 sqlparse==0.3.1
 Whoosh==2.7.4
 xapian-haystack==2.1.1
+furl==2.1.0
+oauth2_provider==3.1.0

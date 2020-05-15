@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class lessons(models.Model):
     """课程的属性"""
+    number = models.CharField(max_length=10)  # 课程号
     name = models.CharField(max_length=10)  # 课程名称
     teacher = models.CharField(max_length=5)  # 开课教师
     institute = models.CharField(max_length=20)  # 开课学院

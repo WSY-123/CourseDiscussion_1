@@ -14,5 +14,6 @@ class feedback_admin(admin.ModelAdmin):
     list_filter = ['title','date_added']
     search_fields = ['date_added','title']
 
-
+admin.site.register(models.lessons,lessons_admin)
+admin.site.register(models.feedback,feedback_admin)
 

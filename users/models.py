@@ -18,7 +18,6 @@ class RegisterForm(forms.Form):
     captcha = CaptchaField(label='验证码')
     institute = forms.CharField(label='学院', max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-
 class User(models.Model):
     '''用户表'''
     gender = (
@@ -30,6 +29,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     sex = models.CharField(max_length=32, choices=gender, default='男')
     c_time = models.DateTimeField(auto_now_add=True)
+    mylessons = models.ManyToManyField('search.lessons',related_name='myusers')
 
     def __str__(self):
         return self.name
