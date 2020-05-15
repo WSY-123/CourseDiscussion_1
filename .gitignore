@@ -1,0 +1,9 @@
+# CoursesDiscussion
+
+_pycache__/
+*.py[cod]
+*$py.class
+
+.Python
+.idea/
+
