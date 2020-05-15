@@ -50,8 +50,11 @@ INSTALLED_APPS = [
     'haystack',
     'widget_tweaks',
     'captcha',
+<<<<<<< HEAD
     'oauth2_provider',
     'corsheaders',
+=======
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
 
     # 我的应用程序
     'home',
@@ -68,7 +71,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware',
+=======
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
 ]
 
 ROOT_URLCONF = 'CourseDiscussion.urls'
@@ -140,7 +146,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+<<<<<<< HEAD
 ]
 
 # 设置第三方登录
 CORS_ORIGIN_ALLOW_ALL = True
+=======
+]
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49

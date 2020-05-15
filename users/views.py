@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from django.urls import reverse
+<<<<<<< HEAD
 from oauth2_provider.views.generic import ProtectedResourceView
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
 from .forms import UserForm
 from furl import furl
+=======
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate
+from .forms import UserForm
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserForm
 from . import models
@@ -86,9 +92,12 @@ def login(request):
 
     login_form = UserForm()
     return render(request, 'users/login.html', locals())
+<<<<<<< HEAD
 
 def process(request):
     f=furl(request.get_full_path())
     CODE=f.args['code']
     print('成功获取CODE')
     return HttpResponseRedirect('https://api.sjtu.edu.cn/sns/oauth2/access_token?client_id=sPu9ghxQjehvRUzH9SuY&secret=B0163EAEC431290BBA79D53246C861A76D9B51D692B08389&code={{CODE}}&scope=openid')
+=======
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49

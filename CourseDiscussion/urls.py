@@ -24,5 +24,8 @@ urlpatterns = [
     path('users/', include('users.urls'), name='users'),
     path('admin/', admin.site.urls),
     url(r'^captcha/', include('captcha.urls')),
+<<<<<<< HEAD
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+=======
+>>>>>>> 6ea765dc4c30afa813d6fca53147404be2d4ae49
 ]
