@@ -25,11 +25,9 @@ def register(request):
         # 登录状态不允许注册
         HttpResponseRedirect(reverse('home:homepage'))
     if request.method == "POST":
-        print('1')
         register_form = models.RegisterForm(request.POST)
         message = "请检查填写的内容！"
         if register_form.is_valid():  # 获取数据
-            print('2')
             username = register_form.cleaned_data['username']
             password1 = register_form.cleaned_data['password1']
             password2 = register_form.cleaned_data['password2']
