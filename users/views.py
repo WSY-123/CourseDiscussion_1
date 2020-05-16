@@ -65,8 +65,8 @@ def register(request):
 
 
 def login(request):
-    if request.session.get('is_login', None):
-        return redirect('home:homepage')
+    #if request.session.get('is_login', None):
+    #    return redirect('home:homepage')
 
     login_form = UserForm()
     if request.method != 'POST':
@@ -74,7 +74,7 @@ def login(request):
     else:
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
-        if not login_form.is_valid():
+        if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             try:
@@ -83,7 +83,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
-                    return redirect('home:homepage')
+                    return HttpResponseRedirect(reverse('home:homepage'))
                 else:
                     message = "密码不正确！"
             except:
