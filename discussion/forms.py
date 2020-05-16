@@ -7,7 +7,7 @@ class NewQuestionForm(ModelForm):
     class Meta:
         model = Question
         fields = ['title', 'body', 'tags']
-        labels = {'title':'标题', 'body': '问题描述', 'tags': '标签'}
+        labels = {'title': '标题', 'body': '问题描述', 'tags': '标签'}
         widgets = {
             'body': forms.Textarea(attrs={'rows': 8, 'placeholder': 'What a question it is?'}),
             'tags': forms.CheckboxSelectMultiple
@@ -29,4 +29,14 @@ class AddCommentForm(ModelForm):
         fields = ['message']
         widgets = {
             'message': forms.Textarea(attrs={'rows': 3})
+        }
+
+
+class AddTagForm(ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['name']
+        labels = {'name': '标签名'}
+        widgets = {
+            'name': forms.Textarea(attrs={'rows': 1})
         }

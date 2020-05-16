@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Tag, Question, Answer, Comment
-from .forms import NewQuestionForm, NewAnswerForm, AddCommentForm
+from .forms import NewQuestionForm, NewAnswerForm, AddCommentForm, AddTagForm
 
 
 def index(request):
@@ -54,3 +54,15 @@ def ask_question(request):
         form = NewQuestionForm()
 
         return render(request, 'discussion/ask_question.html', {'form': form})
+
+
+def add_tag(request):
+    if request.method == 'POST':
+        form = AddTagForm(request.POST)
+        if form.is_valid():
+            tag = form.save()
+            tag.save()
+        return redirect(reverse('discuss:index'))
+    else:
+        form = AddTagForm()
+        return  render(request, 'discussion/add_tag.html', {'form':form})

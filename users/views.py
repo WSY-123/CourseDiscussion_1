@@ -87,18 +87,21 @@ def login(request):
 
     return render(request, 'users/login.html', locals())
 
+
 def process(request):
-    f=furl(request.get_full_path())
-    CODE=f.args['code']
+    f = furl(request.get_full_path())
+    CODE = f.args['code']
     print('成功获取CODE')
-    return HttpResponseRedirect('https://api.sjtu.edu.cn/sns/oauth2/access_token?client_id=sPu9ghxQjehvRUzH9SuY&secret=B0163EAEC431290BBA79D53246C861A76D9B51D692B08389&code={{CODE}}&scope=openid')
+    return HttpResponseRedirect(
+        'https://api.sjtu.edu.cn/sns/oauth2/access_token?client_id=sPu9ghxQjehvRUzH9SuY&secret=B0163EAEC431290BBA79D53246C861A76D9B51D692B08389&code={{CODE}}&scope=openid')
+
 
 def personalpage(request):
     if not request.session.get('is_login', None):
-       # 如果本来未登录,则返回主页
-         return HttpResponseRedirect(reverse('home:homepage'))
-    context = {'user_name':request.user.username,
-                'user_email':request.user.email,
-                # 'user_sex':request.user.sex,
+        # 如果本来未登录,则返回主页
+        return HttpResponseRedirect(reverse('home:homepage'))
+    context = {'user_name': request.user.username,
+               'user_email': request.user.email,
+               # 'user_sex':request.user.sex,
                }
-    return render(request,'users/personalpage.html',context)
+    return render(request, 'users/personalpage.html', context)
