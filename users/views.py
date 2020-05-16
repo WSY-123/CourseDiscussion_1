@@ -65,8 +65,8 @@ def register(request):
 
 
 def login(request):
-    #if request.session.get('is_login', None):
-    #    return redirect('home:homepage')
+    if request.session.get('is_login', None):
+        return redirect('home:homepage')
 
     login_form = UserForm()
     if request.method != 'POST':
