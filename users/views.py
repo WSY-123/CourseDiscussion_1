@@ -102,3 +102,8 @@ def personalpage(request):
     if not request.session.get('is_login', None):
        # 如果本来未登录,则返回主页
          return HttpResponseRedirect(reverse('home:homepage'))
+    context = {'user_name':request.user.username,
+                'user_email':request.user.email,
+                # 'user_sex':request.user.sex,
+               }
+    return render(request,'users/personalpage.html',context)

@@ -10,8 +10,12 @@ class lessons(models.Model):
     institute = models.CharField(max_length=20)  # 开课学院
     credit = models.FloatField()  # 学分
     semester = models.CharField(max_length=15)  # 开课学年
-    time = models.CharField(max_length=20)  # 上课时间
-    weeks = models.CharField(max_length=20)  # 开课周次
+    day = models.IntegerField(default=0)  # 周几上课
+    time_started = models.IntegerField(default=0)   #第几节开始
+    time_ended = models.IntegerField(default=0)  #第几节结束
+    week_started = models.IntegerField(default=0)  # 开始周次
+    week_ended = models.IntegerField(default=0)   # 结束周次
+    is_interval = models.IntegerField(default=0)   # 是否为单双周，不是为0，单周为1，双周为2
     location = models.CharField(max_length=10)  # 上课地点
     date_added = models.DateTimeField(auto_now_add=True)  # 课程添加时间
 
