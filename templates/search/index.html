@@ -1,15 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'search/base_search.html' %}
 
 {% block title %}搜索{% endblock %}
 
 {% block content %}
-    <li>
         <form action="{% url 'search:haystack_search' %}" method="get">
-            <input type="text" name="q" placeholder="请输入关键字">
-            <input type="submit" id="search" value="搜索">
-        </form>
-    </li>
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
+                    </div>
+                    <div class="col-4">
+                        <input class="btn btn-light" type="submit" id="search" value="搜索">
+                    </div>
+                </div>
+            </div>
 
-    <a href="{% url 'search:feedback' %} " class="btn btn-primary">提交反馈</a>
+        </form>
+
+    <a href="{% url 'search:feedback' %} ">提交反馈</a>
 
 {% endblock %}

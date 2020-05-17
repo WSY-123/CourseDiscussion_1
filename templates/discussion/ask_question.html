@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'discussion/base_discussion.html' %}
 {% load widget_tweaks %}
 {% block title %}提问{% endblock %}
 
@@ -22,6 +22,7 @@
     </div>
     <div class="form-group">
         <label for="{{ form.tags.id_for_label }}">{{ form.tags.label }}</label>
+        <small class="text-muted">若无符合的标签，可暂不选择标签 或 <a href={% url 'discuss:add_tag' %}>添加标签</a></small>
         {{ form.tags  }}
         {% for error in form.tags.errors %}
            <span class="help-block">{{ error }}</span>

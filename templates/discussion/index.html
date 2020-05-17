@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'discussion/base_discussion.html' %}
 
 {% block title %}Discussion{% endblock %}
 
@@ -45,7 +45,10 @@
 
           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
               <div class="container">
-                <h1>标签</h1>
+                <div class="row">
+                <div class="col-8"><h1>标签</h1></div>
+                <div class="col-4"><a href="{% url 'discuss:add_tag' %}" class="btn btn-outline-primary">添加标签</a></div>
+                </div>
                 {% for tag in tags %}
                     <div class="card w-50">
                         <div class="card-header"><a href="{% url 'discuss:tag_questions' tag.id %}">{{ tag.name }}</a></div>
