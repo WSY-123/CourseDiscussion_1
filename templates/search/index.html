@@ -15,8 +15,18 @@
                 </div>
             </div>
 
+            <div class="form-group">
+             <label for="institute">开课学院：</label>
+             <select name="institute" id="institute">
+                <option value ="请选择">请选择</option>
+                {#{% for institute in institutes %}  #}
+                 {#<option value ={{ institute }}>{{ institute }}</option>#}
+                    {# {% endfor %}#}
+                <option value ="电院">电院</option>
+                <option value ="机动">机动</option>
+            </select>
+            </div>
         </form>
-
     <a href="{% url 'search:feedback' %} ">提交反馈</a>
 
 {% endblock %}

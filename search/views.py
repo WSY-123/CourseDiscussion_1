@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import FeedbackForm
 from .models import lessons
+from haystack.views import SearchView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
@@ -8,7 +9,16 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 def index(request):
     """搜索主页"""
-    return render(request, 'search/index.html')
+    institute = request.GET.get("institute")
+    return render(request, 'search/index.html',institute)
+
+
+def select(request):
+    """筛选过后的结果"""
+    institute = request.GET.get("institute")
+    context={"institute":institute}
+    SearchView(context)
+    return render(request,'search/search.html')
 
 
 def feedback(request):
