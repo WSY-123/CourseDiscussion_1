@@ -7,8 +7,7 @@ from furl import furl
 from django.http import HttpResponseRedirect
 from .forms import UserForm
 from . import models
-
-
+import hashlib
 # Create your views here.
 def logout(request):
     """注销账户"""
@@ -49,7 +48,7 @@ def register(request):
                 # 当一切都OK的情况下，创建新用户
                 new_user = models.User.objects.create()
                 new_user.name = username
-                new_user.password = password1
+                new_user.password = hash_code(password1)  # 使用加密密码
                 new_user.email = email
                 new_user.sex = sex
                 new_user.institute = institute
@@ -74,7 +73,7 @@ def login(request):
             password = login_form.cleaned_data['password']
             try:
                 user = models.User.objects.get(name=username)
-                if user.password == password:
+                if user.password == hash_code(password):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
@@ -105,3 +104,9 @@ def personalpage(request):
                # 'user_sex':request.user.sex,
                }
     return render(request, 'users/personalpage.html', context)
+
+def hash_code(s, salt='mysite'):
+    h = hashlib.sha256()
+    s += salt
+    h.update(s.encode())  # update方法只接收bytes类型
+    return h.hexdigest()
