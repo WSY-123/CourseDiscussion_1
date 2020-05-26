@@ -9,6 +9,47 @@
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/submit_successfully.js' %}"></script>
+  <style>
+      .transport{
+          font-size: 15px;
+          position: fixed;
+          bottom: 5px;
+          left:400px;
+          margin: 5px;
+      }
+      .transport>ul{
+          font-family:"微软雅黑 Light";
+      }
+      .transport>ul,li{
+       list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+      .transport>ul>li{
+          float: left;
+      }
+      .transport>ul>li>a{
+          text-decoration: none;
+          display: block;
+          color: #336699;
+          padding: 8px 50px;
+          border-right:1px solid white;
+      }
+      .transport>ul>li>a:hover{
+          color:white;
+          background-color: #A52A2A;
+          font-weight: bold;
+          border-right:1px solid white;
+      }
+
+      .detail>li{
+          font-size: 18px;
+          font-family: "微软雅黑 Light";
+          color: #5897fb;
+      }
+
+  </style>
     {% block stylesheet %}{% endblock %}
   </head>
 
@@ -41,17 +82,42 @@
         </form>
 
         <div class="btn-group" role="group" aria-label="account">
+           {% if not request.session.is_login %}
+        <div class="btn-group" role="group" aria-label="account">
           <a class="btn btn-sm" href="{% url 'users:login' %}">登录</a>
           <a class="btn btn-sm" href="{% url 'users:register' %}">注册</a>
+        </div>
+        {% else %}
+        <ul class="navbar-nav navbar-right">
+           <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ request.session.user_name |capfirst}}
+             </a>
+             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+              <a class="dropdown-item" href="{% url 'users:personalpage' %}">个人主页</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'users:logout' %}">注销</a>
+             </div>
+            </li>
+        </ul>
+        {% endif %}
         </div>
       </div>
     </nav>
 
     <div class="container">
         {% block content %}
+
         {% endblock %}
     </div>
-
+<div class="transport">
+<ul>
+    <li><a class="transport_index" href="https://www.sjtu.edu.cn" target="_blank">学校官网</a></li>
+    <li><a class="transport_oc" href="https://oc.sjtu.edu.cn" target="_blank">Canvas在线平台</a></li>
+    <li><a class="transport_i" href="https://i.sjtu.edu.cn" target="_blank">教学信息服务网</a></li>
+    <li><a class="transport_box" href="https://jbox.sjtu.edu.cn" target="_blank">交大云盘</a></li>
+       </ul>
+</div>
     {% endblock body %}
   </body>
 </html>
