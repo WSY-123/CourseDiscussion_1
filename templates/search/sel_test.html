@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="">
+    <select name="sel_value">
+        {# 这里我们遍历form表单中的SELVALUE这个字典,然后把key,value成对取出  #}
+        {% for key,value in select_form.SELVALUE %}
+            <option value="{{ value }}">{{ key }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="测试"/>
+    {% csrf_token %}
+</form>
+</body>
+</html>
