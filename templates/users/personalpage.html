@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}个人主页{% endblock %}
 
-
 {% block content %}
-    {% if user_name %}
-        <p>{{ user_name}}</p>
-        <p>{{ user_email }}</p>
+    {% if  request.session.is_login %}
+        <ul class="detail">
+        <li class="username">用户名：{{ user_name}}</li>
+        <li class="sex">性别：{{ user_sex }}</li>
+        <li class="email">电子邮箱：{{ user_email }}</li>
+        <li class="institute">学院：{{ user_institute }}</li>
+        <li class="mylessons">我的课程：{{ user_mylessons }}</li>
+        </ul>
     {% endif %}
 {% endblock %}
