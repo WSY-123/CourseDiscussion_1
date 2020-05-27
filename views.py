@@ -95,9 +95,12 @@ class SearchView(object):
         #print(list(self.form.search()))
 
         x = []
+        get_data = ""
         for result in self.form.search():
-            if result.object.institute == self.request.GET["institute"] :
+            get_data = self.request.GET["institute"]
+            if result.object.institute == get_data or get_data == "请选择":
               x.append(result)
+
         return x
 
     def build_page(self):
