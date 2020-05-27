@@ -2,7 +2,6 @@
 {% block title %}个人主页{% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
     {% if  request.session.is_login %}
       <div class="container">
       <div class="row">
@@ -16,9 +15,6 @@
         <div class="col-10">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="detail" role="tabpanel">
-=======
-    {% if   request.session.is_login %}
->>>>>>> 6dd422eb79dbb795da9729a116826d5a59724a43
         <ul class="detail">
         <li class="username">用户名：{{ user_name}}</li>
         <li class="sex">性别：{{ user_sex }}</li>

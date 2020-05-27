@@ -9,13 +9,7 @@ from .models import User
 from .forms import UserForm
 from . import models
 import hashlib
-<<<<<<< HEAD
 
-
-=======
-import requests
-# Create your views here.
->>>>>>> 6dd422eb79dbb795da9729a116826d5a59724a43
 def logout(request):
     """注销账户"""
     if not request.session.get('is_login', None):
