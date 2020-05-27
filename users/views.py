@@ -10,6 +10,7 @@ from .forms import UserForm
 from . import models
 import hashlib
 
+
 def logout(request):
     """注销账户"""
     if not request.session.get('is_login', None):
@@ -91,38 +92,39 @@ def login(request):
 def process(request):
     f = furl(request.get_full_path())
     code = f.args['code']
-    url='https://jaccount.sjtu.edu.cn/oauth2/token'
-    client_id='sPu9ghxQjehvRUzH9SuY'
-    client_secret='B0163EAEC431290BBA79D53246C861A76D9B51D692B08389'
-    grant_type='authorization_code'
-    redirect_uri='https://example-app.com/redirect'
-    data={
-        'grant_type':grant_type,
-        'code':code,
-        'client_id':client_id,
-        'client_secret':client_secret,
-        'redirect_uri':redirect_uri
+    url = 'https://jaccount.sjtu.edu.cn/oauth2/token'
+    client_id = 'sPu9ghxQjehvRUzH9SuY'
+    client_secret = 'B0163EAEC431290BBA79D53246C861A76D9B51D692B08389'
+    grant_type = 'authorization_code'
+    redirect_uri = 'https://example-app.com/redirect'
+    data = {
+        'grant_type': grant_type,
+        'code': code,
+        'client_id': client_id,
+        'client_secret': client_secret,
+        'redirect_uri': redirect_uri
     }
-    result=requests.post(url,data)
+    result = requests.post(url, data)
     print(result.text)
     return HttpResponse('登录成功，正在跳转')
+
 
 def personalpage(request):
     if not request.session.get('is_login', None):
         # 如果本来未登录,则返回主页
         return HttpResponseRedirect(reverse('home:homepage'))
     user = User.objects.get(id=request.session.get('user_id'))
-    context = {'user':user,
+    context = {'user': user,
                'user_name': user.name,
                'user_email': user.email,
                'user_sex': user.sex,
-               'user_institute':user.institute,
+               'user_institute': user.institute,
                }
     return render(request, 'users/personalpage.html', context)
+
 
 def hash_code(s, salt='mysite'):
     h = hashlib.sha256()
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
-
