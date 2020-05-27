@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %}
 {% load static %}
 
@@ -14,3 +15,22 @@
 {% endblock %}
 
 
+=======
+{% extends 'base.html' %}
+{% load static %}
+
+{% block nav-item %}
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'home:homepage' %}">主页</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'search:index' %}">课程</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'discuss:index' %}">问答</a>
+    </li>
+
+{% endblock %}
+
+
+>>>>>>> 6dd422eb79dbb795da9729a116826d5a59724a43

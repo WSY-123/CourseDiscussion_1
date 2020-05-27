@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'discussion/base_discussion.html' %}
 {% load widget_tweaks %}
 {% block title %}{{ question.title }}{% endblock %}
@@ -93,4 +94,101 @@
         {% endfor %}
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
+=======
+{% extends 'discussion/base_discussion.html' %}
+{% load widget_tweaks %}
+{% block title %}{{ question.title }}{% endblock %}
+
+{% block content %}
+
+    <h2>{{ question.title}}</h2>
+
+    <div class="container">
+        <div class="row">
+            <p class="text-muted">浏览 &nbsp;</p>
+            <p>{{ question.views }}</p>
+            <p class="text-muted">&nbsp;次</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">问题描述</div>
+        <div class="card-body">
+            <div class="col text-left">
+            {{ question.body }}
+            <div class="col text-right">
+                <small class="text-muted">匿名用户</small><br>
+                <small class="text-muted">{{ question.create_at }}</small>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    {% if question.answers.count > 1 %}
+        <h5>{{ question.answers.count }} answers</h5>
+    {% else %}
+        <h5>{{ question.answers.count }} answer</h5>
+    {% endif %}
+
+    {% for answer in question.answers.all %}
+        <div class="card">
+        <div class="card-body">
+            <div class="col text-left">
+            {{ answer.message }}
+            <div class="col text-right">
+                <small class="text-muted">匿名用户</small><br>
+                <small class="text-muted">{{ answer.create_at }}</small>
+            </div>
+            {% for comment in answer.comments.all %}
+                <div class="container">
+                    <div class="row">
+                        <p>{{ comment.message }} </p>
+                        <small class="text-muted">&nbsp;-- 匿名用户，{{ comment.create_at }}</small>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+            <small>
+                <a  data-toggle="collapse" href="#collapseExample{{ answer.id }}" aria-expanded="false">
+                    add a comment
+                </a>
+            </small>
+
+            <div class="collapse" id="collapseExample{{ answer.id }}">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ comment_form.message|add_class:'form-control' }}
+                    <input type="hidden" name="which" value="comment">
+                    <input type="hidden" name="current_answer" value="{{ answer.id }}">
+                    {% for error in comment_form.message.errors %}
+                        <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-outline-success"><small>Comment</small></button>
+            </form>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% for hidden in answer_form.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
+        
+        {% for field in answer_form.visible_fields %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}"><h5>Your Answer</h5></label>
+            {{ field|add_class:'form-control' }}
+            <input type="hidden" name="which" value="answer">
+            {% for error in field.errors %}
+               <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+>>>>>>> 6dd422eb79dbb795da9729a116826d5a59724a43
 {% endblock %}
