@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from .forms import UserForm
 from . import models
 import hashlib
+import requests
 # Create your views here.
 def logout(request):
     """注销账户"""
@@ -89,11 +90,22 @@ def login(request):
 
 def process(request):
     f = furl(request.get_full_path())
-    CODE = f.args['code']
-    print('成功获取CODE')
-    return HttpResponseRedirect(
-        'https://api.sjtu.edu.cn/sns/oauth2/access_token?client_id=sPu9ghxQjehvRUzH9SuY&secret=B0163EAEC431290BBA79D53246C861A76D9B51D692B08389&code={{CODE}}&scope=openid')
-
+    code = f.args['code']
+    url='https://jaccount.sjtu.edu.cn/oauth2/token'
+    client_id='sPu9ghxQjehvRUzH9SuY'
+    client_secret='B0163EAEC431290BBA79D53246C861A76D9B51D692B08389'
+    grant_type='authorization_code'
+    redirect_uri='https://example-app.com/redirect'
+    data={
+        'grant_type':grant_type,
+        'code':code,
+        'client_id':client_id,
+        'client_secret':client_secret,
+        'redirect_uri':redirect_uri
+    }
+    result=requests.post(url,data)
+    print(result.text)
+    return HttpResponse('登录成功，正在跳转')
 
 def personalpage(request):
     if not request.session.get('is_login', None):
@@ -110,3 +122,4 @@ def hash_code(s, salt='mysite'):
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
+
