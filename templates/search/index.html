@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'search/base_search.html' %}
 
 {% block title %}搜索{% endblock %}
@@ -26,43 +25,26 @@
                     {# {% endfor %}#}
                 <option value ="电院">电院</option>
                 <option value ="机动">机动</option>
+                <option value ="生医工">生医工</option>
+                <option value ="船院">船院</option>
+                <option value ="材料">材料</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+             <label for="year">开课学年：</label>
+             <select name="year" id="year">
+                <option value ="请选择">请选择</option>
+                {#{% for institute in institutes %}  #}
+                 {#<option value ={{ institute }}>{{ institute }}</option>#}
+                    {# {% endfor %}#}
+                <option value ="0">0</option>
+                <option value ="1">1</option>
+                <option value ="2">2</option>
             </select>
             </div>
         </form>
     <a href="{% url 'search:feedback' %} ">提交反馈</a>
     </div>
-{% endblock %}
-=======
-{% extends 'search/base_search.html' %}
-
-{% block title %}搜索{% endblock %}
-
-{% block content %}
-        <form action="{% url 'search:haystack_search' %}" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8">
-                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
-                    </div>
-                    <div class="col-4">
-                        <input class="btn btn-light" type="submit" id="search" value="搜索">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-             <label for="institute">开课学院：</label>
-             <select name="institute" id="institute">
-                <option value ="请选择">请选择</option>
-                {#{% for institute in institutes %}  #}
-                 {#<option value ={{ institute }}>{{ institute }}</option>#}
-                    {# {% endfor %}#}
-                <option value ="电院">电院</option>
-                <option value ="机动">机动</option>
-            </select>
-            </div>
-        </form>
-    <a href="{% url 'search:feedback' %} ">提交反馈</a>
 
 {% endblock %}
->>>>>>> 6dd422eb79dbb795da9729a116826d5a59724a43
