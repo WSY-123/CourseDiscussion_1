@@ -7,7 +7,6 @@ class QuestionIndex(indexes.SearchIndex, indexes.Indexable):
     #title = indexes.CharField(max_length=100, model_attr='title')
     #body = indexes.CharField(max_length=1000, model_attr='body')
     #create_at = indexes.DateTimeField(auto_now_add=True, model_attr='create_at')
-    #votes = indexes.PositiveIntegerField(default=0, model_attr='votes')
     #views = indexes.PositiveIntegerField(default=0, model_attr='views')
     # 对那张表进行查询
     def get_model(self):

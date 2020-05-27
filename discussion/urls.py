@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from haystack.views import SearchView
+
 app_name = 'discuss'
 urlpatterns = [
     path('', views.index, name='index'),

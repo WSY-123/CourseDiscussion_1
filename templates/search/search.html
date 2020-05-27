@@ -12,30 +12,20 @@
 
 　　{# 如果存在搜索关键字 #}
     {% if query %}
-        {% for result in page.object_list %}<div class="media">
-            {#   {% if result.object.institute == '电院' %}#}
-            <a href="{{  result.object.get_absolute_url }}" class="list-group-item active">
-                    {% if result.object.avatar %}
-                        <div class="media-left">
-                            <img src="{{  result.object.avatar.url }}" alt="avatar" style="max-width: 100px; border-radius: 20px">
-                        </div>
-            {% endif %}
-
-                <div class="media-body">
-                    <h4 class="list-group-item-heading">课程名：{{ result.object.name }}</h4>
-                    <p class="list-group-item-text">学分：{{ result.object.credit }}</p>
-                    <p class="list-group-item-text">教师：{{ result.object.teacher }}</p>
-                    <p class="list-group-item-text">学院：{{ result.object.institute}}</p>
-                    <p class="list-group-item-text">开课学年：{{ result.object.semester }}</p>
-                    <p class="list-group-item-text">上课时间：{{ result.object.time }}</p>
-                    <p class="list-group-item-text">上课周次：{{ result.object.weeks }}</p>
-                    <p class="list-group-item-text">上课地点：{{ result.object.location }}</p>
+        {% for result in page.object_list %}
+                <div class="card">
+                    <div class="card-header">课程名：{{ result.object.name }}</div>
+                    <div class="card-body">
+                    <p class="card-text">学分：{{ result.object.credit }}</p>
+                    <p class="card-text">教师：{{ result.object.teacher }}</p>
+                    <p class="card-text">学院：{{ result.object.institute}}</p>
+                    <p class="card-text">开课学年：{{ result.object.semester }}</p>
+                    <p class="card-text">上课时间：{{ result.object.time }}</p>
+                    <p class="card-text">上课周次：{{ result.object.weeks }}</p>
+                    <p class="card-text">上课地点：{{ result.object.location }}</p>
+                    </div>
                 </div>
-            </a>
-            {# {% endif %} #}
-
-        </div>
-            {% empty %}
+        {% empty %}
             <h3>没有找到相关课程</h3>
         {% endfor %}
     {% endif %}

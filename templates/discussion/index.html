@@ -7,19 +7,59 @@
       <div class="row">
         <div class="col-2">
            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">最新问题</a>
-             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">问题分类</a>
+             <a class="nav-link active" id="v-pills-new-tab" data-toggle="pill" href="#v-pills-new" role="tab" aria-controls="v-pills-new" aria-selected="true">最新问题</a>
+             <a class="nav-link" id="v-pills-hot-tab" data-toggle="pill" href="#v-pills-hot" role="tab" aria-controls="v-pills-hot" aria-selected="false">热门问题</a>
+             <a class="nav-link" id="v-pills-tag-tab" data-toggle="pill" href="#v-pills-tag" role="tab" aria-controls="v-pills-tag" aria-selected="false">问题分类</a>
            </div>
         </div>
         <div class="col-10">
           <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="tab-pane fade show active" id="v-pills-new" role="tabpanel" aria-labelledby="v-pills-new-tab">
               <div class="container">
                 <div class="row">
                 <div class="col-8"><div class="page-header"><h1>New Questions</h1></div></div>
+                {# 胡乱加的搜索框 #}
+              <form action="{% url 'discuss:haystack_search' %}" method="get">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
+                    </div>
+                    <div class="col-4">
+                        <input class="btn btn-light" type="submit" id="discuss" value="搜索">
+                    </div>
+                </div>
+            </div>
+        </form>
+                <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
+                </div>
+              </div>
+              <table class="table">
+                <tr>
+                  <th>Question</th>
+                  <th>Answers</th>
+                  <th>Views</th>
+                </tr>
+                {% for question in new_questions %}
+                <tr>
+                  <td>
+                    <a href="{% url 'discuss:question_details' question.id %}">{{ question.title }}</a><br>
+                    {% for tag in question.tags.all %}
+                    <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
+                    {% endfor %}
+                  </td>
+                  <td>{{ question.answers.count }}</td>
+                  <td>{{ question.views }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+          </div>
 
 
-
+            <div class="tab-pane fade" id="v-pills-hot" role="tabpanel" aria-labelledby="v-pills-hot-tab">
+              <div class="container">
+                <div class="row">
+                <div class="col-8"><div class="page-header"><h1>Top Questions</h1></div></div>
                 {# 胡乱加的搜索框 #}
               <form action="{% url 'discuss:haystack_search' %}" method="get">
             <div class="container">
@@ -35,20 +75,16 @@
 
         </form>
 
-
-
-
                 <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
                 </div>
               </div>
               <table class="table">
                 <tr>
                   <th>Question</th>
-                  <th>Votes</th>
                   <th>Answers</th>
                   <th>Views</th>
                 </tr>
-                {% for question in questions %}
+                {% for question in hot_questions %}
                 <tr>
                   <td>
                     <a href="{% url 'discuss:question_details' question.id %}">{{ question.title }}</a><br>
@@ -56,7 +92,6 @@
                     <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
                     {% endfor %}
                   </td>
-                  <td>{{ question.votes }}</td>
                   <td>{{ question.answers.count }}</td>
                   <td>{{ question.views }}</td>
                 </tr>
@@ -64,7 +99,9 @@
               </table>
           </div>
 
-          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+
+          <div class="tab-pane fade" id="v-pills-tag" role="tabpanel" aria-labelledby="v-pills-tag-tab">
               <div class="container">
                 <div class="row">
                 <div class="col-8"><h1>标签</h1></div>

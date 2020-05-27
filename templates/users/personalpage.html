@@ -3,12 +3,67 @@
 
 {% block content %}
     {% if  request.session.is_login %}
+      <div class="container">
+      <div class="row">
+        <div class="col-2">
+           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+             <a class="nav-link active" data-toggle="pill" href="#detail" role="tab"  aria-selected="true">个人信息</a>
+             <a class="nav-link" data-toggle="pill" href="#courses" role="tab"  aria-selected="false">我的课程</a>
+             <a class="nav-link" data-toggle="pill" href="#discussion" role="tab" aria-selected="false">问答记录</a>
+           </div>
+        </div>
+        <div class="col-10">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="detail" role="tabpanel">
         <ul class="detail">
         <li class="username">用户名：{{ user_name}}</li>
         <li class="sex">性别：{{ user_sex }}</li>
         <li class="email">电子邮箱：{{ user_email }}</li>
         <li class="institute">学院：{{ user_institute }}</li>
-        <li class="mylessons">我的课程：{{ user_mylessons }}</li>
         </ul>
+            </div>
+        <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="v-pills-new-tab">
+        </div>
+        <div class="tab-pane fade" id="discussion" role="tabpanel" aria-labelledby="v-pills-new-tab">
+        <h5>我提出的问题</h5>
+        <table class="table">
+                <tr>
+                  <th>问题</th>
+                  <th>提问时间</th>
+                  <th>回答数</th>
+                </tr>
+                {% for question in user.questions.all %}
+                <tr>
+                  <td>
+                    <a href="{% url 'discuss:question_details' question.id %}">{{ question.title }}</a><br>
+                    {% for tag in question.tags.all %}
+                    <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
+                    {% endfor %}
+                  </td>
+                  <td>{{ question.create_at }}</td>
+                  <td>{{ question.answers.count }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+        <h5>我回答过的问题</h5>
+        <table class="table">
+                <tr>
+                  <th>问题</th>
+                  <th>回答时间</th>
+                  <th>评论数</th>
+                </tr>
+                {% for answer in user.answers.all %}
+                <tr>
+                  <td>
+                    <a href="{% url 'discuss:question_details' answer.question.id %}">{{ answer.question.title }}</a><br>
+                    {% for tag in answer.question.tags.all %}
+                    <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
+                    {% endfor %}
+                  </td>
+                  <td>{{ answer.create_at }}</td>
+                  <td>{{ answer.comments.count }}</td>
+                </tr>
+                {% endfor %}
+              </table>
     {% endif %}
 {% endblock %}

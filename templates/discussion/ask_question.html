@@ -3,6 +3,8 @@
 {% block title %}提问{% endblock %}
 
 {% block content %}
+    <div class="container">
+    {% if request.session.is_login %}
     <form method="post">
     {% csrf_token %}
 
@@ -35,4 +37,10 @@
     </div>
 
     </form>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+    您尚未登录，无法提问！请先<a href="{% url 'users:login' %}">登录</a>或<a href="{% url 'users:register' %}">注册</a>
+    </div>
+    {% endif %}
+    </div>
 {% endblock %}

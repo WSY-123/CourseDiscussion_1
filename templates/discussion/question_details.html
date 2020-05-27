@@ -20,7 +20,7 @@
             <div class="col text-left">
             {{ question.body }}
             <div class="col text-right">
-                <small class="text-muted">匿名用户</small><br>
+                <small class="text-muted">{{ question.asked_by }}</small><br>
                 <small class="text-muted">{{ question.create_at }}</small>
             </div>
             </div>
@@ -39,14 +39,14 @@
             <div class="col text-left">
             {{ answer.message }}
             <div class="col text-right">
-                <small class="text-muted">匿名用户</small><br>
-                <small class="text-muted">{{ answer.create_at }}</small>
+                <small class="text-muted">{{ answer.create_by }}</small><br>
+                <small class="text-muted">编辑于{{ answer.create_at }}</small>
             </div>
             {% for comment in answer.comments.all %}
                 <div class="container">
                     <div class="row">
                         <p>{{ comment.message }} </p>
-                        <small class="text-muted">&nbsp;-- 匿名用户，{{ comment.create_at }}</small>
+                        <small class="text-muted">&nbsp;-- {{ comment.create_by }}评论于{{ comment.create_at }}</small>
                     </div>
                 </div>
 

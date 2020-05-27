@@ -5,10 +5,12 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate
 from furl import furl
 from django.http import HttpResponseRedirect
+from .models import User
 from .forms import UserForm
 from . import models
 import hashlib
-# Create your views here.
+
+
 def logout(request):
     """注销账户"""
     if not request.session.get('is_login', None):
@@ -99,9 +101,12 @@ def personalpage(request):
     if not request.session.get('is_login', None):
         # 如果本来未登录,则返回主页
         return HttpResponseRedirect(reverse('home:homepage'))
-    context = {'user_name': request.user.username,
-               'user_email': request.user.email,
-               # 'user_sex':request.user.sex,
+    user = User.objects.get(id=request.session.get('user_id'))
+    context = {'user':user,
+               'user_name': user.name,
+               'user_email': user.email,
+               'user_sex': user.sex,
+               'user_institute':user.institute,
                }
     return render(request, 'users/personalpage.html', context)
 
