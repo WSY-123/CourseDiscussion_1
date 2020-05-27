@@ -2,7 +2,7 @@
 {% block title %}个人主页{% endblock %}
 
 {% block content %}
-    {% if  request.session.is_login %}
+    {% if   request.session.is_login %}
         <ul class="detail">
         <li class="username">用户名：{{ user_name}}</li>
         <li class="sex">性别：{{ user_sex }}</li>
