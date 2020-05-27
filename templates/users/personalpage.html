@@ -45,12 +45,11 @@
                 </tr>
                 {% endfor %}
               </table>
-        <h5>我回答过的问题</h5>
+        <h5>我回答或评论过的问题</h5>
         <table class="table">
                 <tr>
                   <th>问题</th>
-                  <th>回答时间</th>
-                  <th>评论数</th>
+                  <th>回答/评论时间</th>
                 </tr>
                 {% for answer in user.answers.all %}
                 <tr>
@@ -61,7 +60,17 @@
                     {% endfor %}
                   </td>
                   <td>{{ answer.create_at }}</td>
-                  <td>{{ answer.comments.count }}</td>
+                </tr>
+                {% endfor %}
+                {% for comment in user.comments.all %}
+                <tr>
+                  <td>
+                    <a href="{% url 'discuss:question_details' comment.answer.question.id %}">{{ comment.answer.question.title }}</a><br>
+                    {% for tag in comment.answer.question.tags.all %}
+                    <small><a href="{% url 'discuss:tag_questions' tag.id %}"><span class="badge badge-secondary">{{ tag }}</span></a></small>
+                    {% endfor %}
+                  </td>
+                  <td>{{ comment.create_at }}</td>
                 </tr>
                 {% endfor %}
               </table>
