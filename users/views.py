@@ -78,6 +78,9 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.name
+                    request.session['user_sex'] = user.sex
+                    request.session['user_email'] = user.email
+                    request.session['user_institute'] = user.institute
                     return HttpResponseRedirect(reverse('home:homepage'))
                 else:
                     message = "密码不正确！"
@@ -111,8 +114,11 @@ def personalpage(request):
     if not request.session.get('is_login', None):
         # 如果本来未登录,则返回主页
         return HttpResponseRedirect(reverse('home:homepage'))
-    context = {'user_name': request.user.username,
-               'user_email': request.user.email,
+    context = {'user_name': request.session.get('user_name'),
+               'user_email': request.session.get('user_email'),
+               'user_sex': request.session.get('user_sex'),
+               'user_institute': request.session.get('user_institute'),
+               'user_mylessons': request.session.get('user_mylessons'),
                # 'user_sex':request.user.sex,
                }
     return render(request, 'users/personalpage.html', context)
