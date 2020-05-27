@@ -15,9 +15,20 @@ import os
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'search.whoosh_cn_backend.WhooshEngine',
+        'INDEX_NAME': 'haystack',
+        'URL': 'http://localhost:8000/search',
+        'EXCLUDED_INDEXES': ['discussion.search_indexes.QuestionIndex'],
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
     },
+    'autocomplete': {
+        'ENGINE':'discussion.whoosh_cn_backend.WhooshEngine',
+        'INDEX_NAME': 'autcomplete',
+        'URL': 'http://localhost:8000/discussion',
+        'EXCLUDED_INDEXES': ['search.search_indexes.lessonsIndex'],
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    }
 }
+
 
 # 自动更新索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

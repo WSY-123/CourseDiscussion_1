@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from haystack.views import SearchView
+from .views import SearchView
 
 app_name = 'search'
 urlpatterns = [
@@ -9,5 +9,5 @@ urlpatterns = [
     path('course/', SearchView(), name='haystack_search'),
     #path('course/', views.select, name='haystack_search'),
     path('feedback/', views.feedback, name='feedback'),
-    path('select/',views.select,name='select'),
+    path('select/', views.select, name='select'),
 ]

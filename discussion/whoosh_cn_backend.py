@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.datetime_safe import datetime
 from django.utils.encoding import force_str
-
+from .ChineseAnalyzer import ChineseAnalyzer
 from haystack.backends import (
     BaseEngine,
     BaseSearchBackend,
@@ -239,7 +239,7 @@ class WhooshSearchBackend(BaseSearchBackend):
             else:
                 schema_fields[field_class.index_fieldname] = TEXT(
                     stored=True,
-                    analyzer=StemmingAnalyzer(),
+                    analyzer=ChineseAnalyzer(),
                     field_boost=field_class.boost,
                     sortable=True,
                 )
