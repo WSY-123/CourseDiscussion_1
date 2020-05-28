@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from furl import furl
 from django.http import HttpResponseRedirect
 from .models import User
-from .forms import UserForm
+from .forms import UserForm, RegisterForm
 from . import models
 import hashlib
 
@@ -26,7 +26,7 @@ def register(request):
         # 登录状态不允许注册
         HttpResponseRedirect(reverse('home:homepage'))
     if request.method == "POST":
-        register_form = models.RegisterForm(request.POST)
+        register_form = RegisterForm(request.POST)
         message = "请检查填写的内容！"
         if register_form.is_valid():  # 获取数据
             username = register_form.cleaned_data['username']
@@ -56,7 +56,7 @@ def register(request):
                 new_user.institute = institute
                 new_user.save()
                 return redirect('users:login')  # 自动跳转到登录页面
-    register_form = models.RegisterForm()
+    register_form = RegisterForm()
     return render(request, 'users/register.html', locals())
 
 
