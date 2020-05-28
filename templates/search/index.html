@@ -1,6 +1,7 @@
 {% extends 'search/base_search.html' %}
 
 {% block title %}搜索{% endblock %}
+
 {% block stylesheet %}
 <style>
 .search-form {
@@ -17,6 +18,7 @@
 }
 </style>
 {% endblock %}
+
 {% block content %}
     <div class="container">
     <div class="search-form">
@@ -65,9 +67,6 @@
 
          <a href="{% url 'search:feedback' %} ">提交反馈</a>
     </div>
-
-
-
     </div>
 
 {% endblock %}

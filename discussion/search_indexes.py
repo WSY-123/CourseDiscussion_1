@@ -4,6 +4,7 @@ from .models import Tag, Question
 
 class QuestionIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True, model_attr='tags')  # 创建一个text字段
+
     # 对那张表进行查询
     def get_model(self):
         # 返回这个model

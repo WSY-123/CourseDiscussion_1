@@ -1,6 +1,6 @@
 {% extends 'discussion/base_discussion.html' %}
 
-{% block title %}Discussion{% endblock %}
+{% block title %}问答{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -36,9 +36,9 @@
               </div>
               <table class="table">
                 <tr>
-                  <th>Question</th>
-                  <th>Answers</th>
-                  <th>Views</th>
+                  <th>问题</th>
+                  <th>回答数</th>
+                  <th>浏览量</th>
                 </tr>
                 {% for question in new_questions %}
                 <tr>
@@ -80,9 +80,9 @@
               </div>
               <table class="table">
                 <tr>
-                  <th>Question</th>
-                  <th>Answers</th>
-                  <th>Views</th>
+                  <th>问题</th>
+                  <th>回答数</th>
+                  <th>浏览量</th>
                 </tr>
                 {% for question in hot_questions %}
                 <tr>
@@ -98,8 +98,6 @@
                 {% endfor %}
               </table>
           </div>
-
-
 
           <div class="tab-pane fade" id="v-pills-tag" role="tabpanel" aria-labelledby="v-pills-tag-tab">
               <div class="container">

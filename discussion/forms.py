@@ -4,6 +4,7 @@ from .models import Tag, Question, Answer, Comment
 
 
 class NewQuestionForm(ModelForm):
+    """创建新问题表单"""
     class Meta:
         model = Question
         fields = ['title', 'body', 'tags']
@@ -15,6 +16,7 @@ class NewQuestionForm(ModelForm):
 
 
 class NewAnswerForm(ModelForm):
+    """回答问题表单"""
     class Meta:
         model = Answer
         fields = ['message']
@@ -24,6 +26,7 @@ class NewAnswerForm(ModelForm):
 
 
 class AddCommentForm(ModelForm):
+    """评论表单"""
     class Meta:
         model = Comment
         fields = ['message']
@@ -33,6 +36,7 @@ class AddCommentForm(ModelForm):
 
 
 class AddTagForm(ModelForm):
+    """添加新标签表单"""
     class Meta:
         model = Tag
         fields = ['name']
