@@ -109,3 +109,5 @@ http://127.0.0.1:8000/search/feedback/ 反馈
 ---
 
 **编写筛选功能的时候修改了haystack下的views.py文件，附在根目录下，请注意替换更新本地文件**
+
+**编写模糊查询功能时修改了haystack下的backends文件夹，将search目录下的Chineseanalyzer.py复制到backends中，删除backends中的whoosh_backends并将whoosh_cn_backends复制到backends**
