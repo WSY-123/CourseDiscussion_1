@@ -3,7 +3,7 @@
 {% block title %}{{ question.title }}{% endblock %}
 
 {% block content %}
-
+    <div class="container">
     <h2>{{ question.title}}</h2>
 
     <div class="container">
@@ -21,7 +21,7 @@
             {{ question.body }}
             <div class="col text-right">
                 <small class="text-muted">{{ question.asked_by }}</small><br>
-                <small class="text-muted">{{ question.create_at }}</small>
+                <small class="text-muted">发表于{{ question.create_at }}</small>
             </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <div class="container">
                     <div class="row">
                         <p>{{ comment.message }} </p>
-                        <small class="text-muted">&nbsp;-- {{ comment.create_by }}评论于{{ comment.create_at }}</small>
+                        <small class="text-muted">&nbsp;-- {{ comment.create_by }}&nbsp;评论于{{ comment.create_at }}</small>
                     </div>
                 </div>
 
@@ -91,6 +91,7 @@
                <span class="help-block">{{ error }}</span>
             {% endfor %}
         {% endfor %}
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success">提交</button>
     </form>
+    </div>
 {% endblock %}

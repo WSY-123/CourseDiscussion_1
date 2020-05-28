@@ -1,24 +1,39 @@
 {% extends 'search/base_search.html' %}
 
 {% block title %}搜索{% endblock %}
-
+{% block stylesheet %}
+<style>
+.search-form {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    min-height: 300px;
+    height: auto;
+}
+</style>
+{% endblock %}
 {% block content %}
     <div class="container">
+    <div class="search-form">
         <form action="{% url 'search:haystack_search' %}" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="col-8">
-                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
-                    </div>
-                    <div class="col-4">
-                        <input class="btn btn-light" type="submit" id="search" value="搜索">
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-8">
+               <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
             </div>
-
+            <div class="col-4">
+                <input class="btn btn-light" type="submit" id="search" value="搜索">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
             <div class="form-group">
              <label for="institute">开课学院：</label>
-             <select name="institute" id="institute">
+             <select class="form-control" name="institute" id="institute">
                 <option value ="请选择">请选择</option>
                 {#{% for institute in institutes %}  #}
                  {#<option value ={{ institute }}>{{ institute }}</option>#}
@@ -30,10 +45,11 @@
                 <option value ="材料">材料</option>
             </select>
             </div>
-
+            </div>
+            <div class="col">
             <div class="form-group">
              <label for="year">开课学年：</label>
-             <select name="year" id="year">
+             <select class="form-control" name="year" id="year">
                 <option value ="请选择">请选择</option>
                 {#{% for institute in institutes %}  #}
                  {#<option value ={{ institute }}>{{ institute }}</option>#}
@@ -43,8 +59,15 @@
                 <option value ="2">2</option>
             </select>
             </div>
+            </div>
+        </div>
         </form>
-    <a href="{% url 'search:feedback' %} ">提交反馈</a>
+
+         <a href="{% url 'search:feedback' %} ">提交反馈</a>
+    </div>
+
+
+
     </div>
 
 {% endblock %}
