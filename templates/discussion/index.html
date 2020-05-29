@@ -25,24 +25,23 @@
             <div class="tab-pane fade show active" id="v-pills-new" role="tabpanel" aria-labelledby="v-pills-new-tab">
               <div class="container">
                 <div class="row">
-                <div class="col-8"><div class="page-header"><h1>New Questions</h1></div></div>
+                <div class="col-8"><h1>New Questions</div>
+                <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
+                </div>
+              </div>
 
-                    {# 胡乱加的搜索框 #}
-              <form action="{% url 'discuss:haystack_search_1' %}" method="get">
             <div class="container">
                 <div class="row">
                     <div class="col-8">
-                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
+                   <form action="{% url 'discuss:haystack_search_1' %}" method="get">
+                      <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
                     </div>
                     <div class="col-4">
                         <input class="btn btn-light" type="submit" id="discuss" value="搜索">
                     </div>
                 </div>
             </div>
-        </form>
-                <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
-                </div>
-              </div>
+
               <table class="table table-hover">
                 <tr>
                   <th>问题</th>
@@ -68,13 +67,16 @@
             <div class="tab-pane fade" id="v-pills-hot" role="tabpanel" aria-labelledby="v-pills-hot-tab">
               <div class="container">
                 <div class="row">
-                <div class="col-8"><div class="page-header"><h1>Top Questions</h1></div></div>
-                {# 胡乱加的搜索框 #}
-              <form action="{% url 'discuss:haystack_search_1' %}" method="get">
+                <div class="col-8"><h1>Top Questions</div>
+                <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
+                </div>
+              </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-8">
-                        <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
+                   <form action="{% url 'discuss:haystack_search_1' %}" method="get">
+                      <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
                     </div>
                     <div class="col-4">
                         <input class="btn btn-light" type="submit" id="discuss" value="搜索">
@@ -82,11 +84,6 @@
                 </div>
             </div>
 
-        </form>
-
-                <div class="col-4"><a href="{% url 'discuss:ask_question' %}" class="btn btn-outline-primary">Ask Question</a></div>
-                </div>
-              </div>
               <table class="table table-hover">
                 <tr>
                   <th>问题</th>
