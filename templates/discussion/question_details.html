@@ -4,6 +4,7 @@
 
 {% block content %}
     <div class="container">
+    {% if request.session.is_login %}
     <h2>{{ question.title}}</h2>
 
     <div class="container">
@@ -27,11 +28,8 @@
         </div>
         </div>
 
-    {% if question.answers.count > 1 %}
-        <h5>{{ question.answers.count }} answers</h5>
-    {% else %}
-        <h5>{{ question.answers.count }} answer</h5>
-    {% endif %}
+    <br>
+    <h5>{{ question.answers.count }} 个回答</h5>
 
     {% for answer in question.answers.all %}
         <div class="card">
@@ -44,9 +42,14 @@
             </div>
             {% for comment in answer.comments.all %}
                 <div class="container">
+                <div class="dropdown-divider"></div>
                     <div class="row">
-                        <p>{{ comment.message }} </p>
-                        <small class="text-muted">&nbsp;-- {{ comment.create_by }}&nbsp;评论于{{ comment.create_at }}</small>
+                        <div class="col">
+                            <p>{{ comment.message }} </p>
+                        </div>
+                        <div class="col text-right">
+                        <small class="text-muted">{{ comment.create_by }}&nbsp;评论于{{ comment.create_at }}</small>
+                        </div>
                     </div>
                 </div>
 
@@ -75,7 +78,7 @@
         </div>
         </div>
     {% endfor %}
-
+    <br><br>
     <form method="post">
         {% csrf_token %}
         {% for hidden in answer_form.hidden_fields %}
@@ -93,5 +96,10 @@
         {% endfor %}
         <button type="submit" class="btn btn-success">提交</button>
     </form>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+    您尚未登录，无法查看问题详情！请先<a href="{% url 'users:login' %}">登录</a>或<a href="{% url 'users:register' %}">注册</a>
+    </div>
+    {% endif %}
     </div>
 {% endblock %}
