@@ -15,17 +15,13 @@ import os
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'search.whoosh_cn_backend.WhooshEngine',
-        'INDEX_NAME': 'haystack',
-        'URL': 'http://localhost:8000/search',
         'EXCLUDED_INDEXES': ['discussion.search_indexes.QuestionIndex'],
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
     },
-    'autocomplete': {
-        'ENGINE':'discussion.whoosh_cn_backend.WhooshEngine',
-        'INDEX_NAME': 'autcomplete',
-        'URL': 'http://localhost:8000/discussion',
+    'discussion_index': {
+        'ENGINE': 'discussion.whoosh_cn_backend.WhooshEngine',
         'EXCLUDED_INDEXES': ['search.search_indexes.lessonsIndex'],
-        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index_1'),
     }
 }
 

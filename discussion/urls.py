@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from haystack.views import SearchView
+from haystack.views import discussionSearchView
 
 app_name = 'discuss'
 urlpatterns = [
@@ -9,5 +9,5 @@ urlpatterns = [
     path('tags/<int:id>/', views.tag_questions, name='tag_questions'),
     path('tags/add/', views.add_tag, name='add_tag'),
     path('<int:id>/', views.question_details, name='question_details'),
-    path('search/', SearchView(), name='haystack_search'),
+    path('discussion/search/', discussionSearchView(), name='haystack_search_1'),
 ]

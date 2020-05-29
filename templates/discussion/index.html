@@ -18,8 +18,9 @@
               <div class="container">
                 <div class="row">
                 <div class="col-8"><div class="page-header"><h1>New Questions</h1></div></div>
-                {# 胡乱加的搜索框 #}
-              <form action="{% url 'discuss:haystack_search' %}" method="get">
+
+                    {# 胡乱加的搜索框 #}
+              <form action="{% url 'discuss:haystack_search_1' %}" method="get">
             <div class="container">
                 <div class="row">
                     <div class="col-8">
@@ -61,7 +62,7 @@
                 <div class="row">
                 <div class="col-8"><div class="page-header"><h1>Top Questions</h1></div></div>
                 {# 胡乱加的搜索框 #}
-              <form action="{% url 'discuss:haystack_search' %}" method="get">
+              <form action="{% url 'discuss:haystack_search_1' %}" method="get">
             <div class="container">
                 <div class="row">
                     <div class="col-8">
