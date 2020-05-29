@@ -12,7 +12,7 @@ RESULTS_PER_PAGE = getattr(settings, "HAYSTACK_SEARCH_RESULTS_PER_PAGE", 20)
 
 class SearchView(object):
     from haystack.query import SearchQuerySet
-    posters = SearchQuerySet()
+    posters = SearchQuerySet().using('lessons_search')
 
     template = "search/search.html"
     extra_context = {}
@@ -175,7 +175,7 @@ class SearchView(object):
 
 class discussionSearchView(object):
     from haystack.query import SearchQuerySet
-    posters = SearchQuerySet().using('discussion_index')
+    posters = SearchQuerySet()
     template = "search/discussion_search.html"
     extra_context = {}
     query = ""

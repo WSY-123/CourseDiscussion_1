@@ -20,7 +20,6 @@ class Question(models.Model):
     def __str__(self):
         return self.title
 
-
 class Answer(models.Model):
     message = models.CharField(max_length=1000)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')

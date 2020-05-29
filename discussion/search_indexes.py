@@ -1,5 +1,5 @@
 from haystack import indexes
-from .models import Tag, Question
+from .models import  Question
 
 
 class QuestionIndex(indexes.SearchIndex, indexes.Indexable):
@@ -11,6 +11,7 @@ class QuestionIndex(indexes.SearchIndex, indexes.Indexable):
         return Question
 
     # 针对哪些数据进行查询
-    def index_queryset(self, using='discussion_index'):  # 重载index_..函数
-        """Used when the entire index for model is updated."""
-        return self.get_model().objects.all()
+   # def index_queryset(self):  # 重载index_..函数
+    #    """Used when the entire index for model is updated."""
+     #   return self.get_model().objects.all()
+

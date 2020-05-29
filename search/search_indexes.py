@@ -8,15 +8,14 @@ class lessonsIndex(indexes.SearchIndex, indexes.Indexable):  # 类名必须为�
 
 
     # 对那张表进行查询
-    def get_model(self):  # 重载get_model方法，必须要有！
+    def get_model(self):
         # 返回这个model
         return lessons
 
 
-"""
+
     # 针对哪些数据进行查询
-    def index_queryset(self, using=None):  # 重载index_..函数
-        "Used when the entire index for model is updated.
+    def index_queryset(self, using='lessons_search'):  # 重载index_..函数
+
         # return self.get_model().objects.filter(updated__lte=datetime.datetime.now())
         return self.get_model().objects.all()
-        """

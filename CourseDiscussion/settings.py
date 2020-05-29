@@ -13,21 +13,24 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 HAYSTACK_CONNECTIONS = {
-    'default': {
+    'lessons_search': {
         'ENGINE': 'search.whoosh_cn_backend.WhooshEngine',
         'EXCLUDED_INDEXES': ['discussion.search_indexes.QuestionIndex'],
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+        'INDEX_NAME': 'haystack',
     },
-    'discussion_index': {
+    'default': {
         'ENGINE': 'discussion.whoosh_cn_backend.WhooshEngine',
         'EXCLUDED_INDEXES': ['search.search_indexes.lessonsIndex'],
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index_1'),
+        'INDEX_NAME': 'haystack',
     }
 }
 
 
 # 自动更新索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -59,6 +62,7 @@ INSTALLED_APPS = [
     'captcha',
     'oauth2_provider',
     'corsheaders',
+    'celery_haystack',
 
 
     # 我的应用程序

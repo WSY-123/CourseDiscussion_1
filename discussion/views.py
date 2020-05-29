@@ -58,6 +58,7 @@ def ask_question(request):
             question = form.save(commit=False)
             question.asked_by = User.objects.get(id=request.session.get('user_id'))
             question.save()
+
         return redirect(reverse('discuss:question_details', kwargs={'id': question.id}))
 
     else:
