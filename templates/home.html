@@ -2,6 +2,14 @@
 {% load static %}
 {% block title %}CourseDiscussion - 主页{% endblock %}
 
+{% block stylesheet %}
+<style>
+    .jumbotron{
+    margin:0;
+    }
+</style>
+{% endblock %}
+
 {% block nav-item %}
     <li class="nav-item ">
         <a class="nav-link active" href="{% url 'home:homepage' %}">主页</a>
@@ -75,6 +83,5 @@
      </div>
     </div>
     </div>
-    </hr>
 </div>
 {% endblock %}
