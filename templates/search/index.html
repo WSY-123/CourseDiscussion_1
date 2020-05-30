@@ -1,34 +1,26 @@
 {% extends 'search/base_search.html' %}
-
+{%  load static %}
 {% block title %}搜索{% endblock %}
 
 {% block stylesheet %}
-<style>
-.search-form {
-    width: 70%;
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    min-height: 300px;
-    height: auto;
-}
-</style>
+    <link rel="stylesheet" href="{% static 'css/search_style.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="container">
-    <div class="search-form">
-        <form action="{% url 'search:haystack_search' %}" method="get">
-        <div class="row">
-            <div class="col-8">
-               <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
-            </div>
-            <div class="col-4">
-                <input class="btn btn-light" type="submit" id="search" value="搜索">
+    <div class="row justify-content-center" style="margin-top: 150px">
+      <div class="card">
+        <div class="card-body">
+        <form  action="{% url 'search:haystack_search' %}" method="get">
+        <div class="row justify-content-center" style="margin: 40px">
+            <div class="search-box">
+            <input class="search-txt" type="text" name="" placeholder="请输入关键字">
+            <button class="search-btn">
+                <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg>
+            </button>
             </div>
         </div>
         <div class="row">
@@ -66,6 +58,8 @@
         </form>
 
          <a href="{% url 'search:feedback' %} ">提交反馈</a>
+    </div>
+    </div>
     </div>
     </div>
 
