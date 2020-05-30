@@ -9,6 +9,7 @@ from .models import User
 from .forms import UserForm, RegisterForm, PasswordResetForm
 from . import models
 import hashlib
+import requests
 
 
 def logout(request):

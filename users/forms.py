@@ -54,3 +54,4 @@ class PasswordResetForm(forms.Form):
     old_password = forms.CharField(label="旧密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     new_password1 = forms.CharField(label="新密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     new_password2 = forms.CharField(label="确认新密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    captcha = CaptchaField(label='验证码', error_messages={"invalid": "验证码错误"})
