@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from furl import furl
 from django.http import HttpResponseRedirect
 from .models import User
-from .forms import UserForm, RegisterForm
+from .forms import UserForm, RegisterForm, PasswordResetForm
 from . import models
 import hashlib
 
@@ -128,3 +128,32 @@ def hash_code(s, salt='mysite'):
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
+
+
+def password_reset(request):
+    if not request.session.get('is_login', None):
+        return HttpResponseRedirect(reverse('home:homepage'))
+
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            old = form.cleaned_data['old_password']
+            new1 = form.cleaned_data['new_password1']
+            new2 = form.cleaned_data['new_password2']
+            user = User.objects.get(id=request.session.get('user_id'))
+            if user.password == hash_code(old):
+                if new1 != new2:
+                    message = "两次输入的密码不同！"
+                    return render(request, 'users/password_reset.html', {'message': message})
+                else:
+                    user.password = hash_code(new1)
+                    user.save()
+                    request.session.flush()
+                    return redirect(reverse('users:login'))  # 修改密码后重新登录
+            else:
+                message = "密码不正确！"
+                form = PasswordResetForm()
+                return render(request, 'users/password_reset.html', {'form': form, 'message': message})
+
+    form = PasswordResetForm()
+    return render(request, 'users/password_reset.html', {'form': form})

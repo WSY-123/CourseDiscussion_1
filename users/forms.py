@@ -48,3 +48,9 @@ class RegisterForm(forms.Form):
     sex = forms.ChoiceField(label='性别', choices=gender)
     captcha = CaptchaField(label='验证码')
     institute = forms.ChoiceField(label='学院', choices=institute)
+
+
+class PasswordResetForm(forms.Form):
+    old_password = forms.CharField(label="旧密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password1 = forms.CharField(label="新密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password2 = forms.CharField(label="确认新密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
