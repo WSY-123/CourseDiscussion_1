@@ -97,7 +97,7 @@ def process(request):
     client_id = 'sPu9ghxQjehvRUzH9SuY'
     client_secret = 'B0163EAEC431290BBA79D53246C861A76D9B51D692B08389'
     grant_type = 'authorization_code'
-    redirect_uri = 'https://example-app.com/redirect'
+    redirect_uri = 'http://127.0.0.1:8000/users/process/'
     data = {
         'grant_type': grant_type,
         'code': code,
@@ -107,7 +107,7 @@ def process(request):
     }
     result = requests.post(url, data)
     print(result.text)
-    return HttpResponse('登录成功，正在跳转')
+    return HttpResponseRedirect(reverse('home:homepage'))
 
 
 def personalpage(request):
