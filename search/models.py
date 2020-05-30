@@ -7,9 +7,9 @@ class lessons(models.Model):
     number = models.CharField(max_length=10)  # 课程号
     name = models.CharField(max_length=10)  # 课程名称
     teacher = models.CharField(max_length=5)  # 开课教师
-    institute = models.CharField(max_length=20, default="船舶海洋与建筑工程学院")  # 开课学院
+    institute = models.CharField(max_length=20, default="生物医学工程学院")  # 开课学院
     credit = models.FloatField(default=2.0)  # 学分
-    semester = models.CharField(max_length=15, default="2019-2020-1")  # 开课学年
+    semester = models.CharField(max_length=15, default="2019-2020-2")  # 开课学年
     day = models.IntegerField(default=0)  # 周几上课
     time_started = models.IntegerField(default=0)   #第几节开始
     time_ended = models.IntegerField(default=0)  #第几节结束
