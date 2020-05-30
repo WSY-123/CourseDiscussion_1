@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     'captcha',
     'oauth2_provider',
     'corsheaders',
-    'celery_haystack',
 
 
     # 我的应用程序
