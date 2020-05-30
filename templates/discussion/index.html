@@ -31,15 +31,16 @@
               </div>
 
             <div class="container">
+                <form action="{% url 'discuss:haystack_search_1' %}" method="get">
                 <div class="row">
                     <div class="col-8">
-                   <form action="{% url 'discuss:haystack_search_1' %}" method="get">
                       <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
                     </div>
                     <div class="col-4">
                         <input class="btn btn-light" type="submit" id="discuss" value="搜索">
                     </div>
                 </div>
+                </form>
             </div>
 
               <table class="table table-hover">
@@ -73,15 +74,16 @@
               </div>
 
             <div class="container">
+                <form action="{% url 'discuss:haystack_search_1' %}" method="get">
                 <div class="row">
                     <div class="col-8">
-                   <form action="{% url 'discuss:haystack_search_1' %}" method="get">
                       <input  class="form-control" type="text" name="q" placeholder="请输入关键字">
                     </div>
                     <div class="col-4">
                         <input class="btn btn-light" type="submit" id="discuss" value="搜索">
                     </div>
                 </div>
+                </form>
             </div>
 
               <table class="table table-hover">
