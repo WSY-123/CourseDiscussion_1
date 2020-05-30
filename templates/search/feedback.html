@@ -3,7 +3,8 @@
 {% block title %}反馈{% endblock %}
 
 {% block content %}
-    <h3>反馈</h3>
+    <div class="container">
+    <h3 style="margin: 40px">反馈</h3>
     <form method="post">
         {% csrf_token %}
 
@@ -19,4 +20,5 @@
           <a href="{% url 'search:index' %}" class="btn btn-light">取消</a>
         </div>
     </form>
+    </div>
 {% endblock content %}
