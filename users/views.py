@@ -104,7 +104,7 @@ def register_1(request, name, email):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
-                return HttpResponseRedirect(reverse('home:homepage'))  # 自动跳转到登录页面
+                return HttpResponseRedirect(reverse('home:homepage'))
     register_form = RegisterForm()
     return render(request, 'users/register_1.html', locals())
 
@@ -167,7 +167,12 @@ def process(request):
         email = item['account']
     same_name_user = models.User.objects.filter(name=name)
     if same_name_user:  # 用户名唯一
-        return HttpResponseRedirect('http://127.0.0.1:8000/users/login/')
+        user = models.User.objects.get(name=name)
+        request.session['is_login'] = True
+        request.session['user_id'] = user.id
+        request.session['user_name'] = user.name
+        return HttpResponseRedirect(reverse('home:homepage'))
+        #return HttpResponseRedirect('http://127.0.0.1:8000/users/login/')
     else:
         return redirect(reverse('users:register_1', kwargs={'name': name, 'email': email + '@sjtu.edu.cn'}))
 
