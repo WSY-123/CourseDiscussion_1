@@ -161,8 +161,11 @@ def process(request):
     for item in entities:
         name = item['name']
         email = item['account']
-
-    return HttpResponseRedirect('http://127.0.0.1:8000/users/register_1?name='+name+'&email='+email+'@sjtu.edu.cn')
+    same_name_user = models.User.objects.filter(name=name)
+    if same_name_user:  # 用户名唯一
+        return HttpResponseRedirect('http://127.0.0.1:8000/users/login/')
+    else:
+        return HttpResponseRedirect('http://127.0.0.1:8000/users/register_1?name='+name+'&email='+email+'@sjtu.edu.cn')
 
 
 def personalpage(request):
