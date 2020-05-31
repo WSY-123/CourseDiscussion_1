@@ -60,11 +60,11 @@ def register(request):
                 return redirect('users:login')  # 自动跳转到登录页面
     register_form = RegisterForm()
     return render(request, 'users/register.html', locals())
-    
-def register_1(request):
-    f = furl(request.get_full_path())
-    name = f.args['name']
-    email_1 = f.args['email']
+
+
+def register_1(request, name, email):
+    name = name
+    email = email
     if request.session.get('is_login', None):
         # 登录状态不允许注册
         HttpResponseRedirect(reverse('home:homepage'))
@@ -76,24 +76,24 @@ def register_1(request):
             username = name
             password1 = register_form.cleaned_data['password1']
             password2 = register_form.cleaned_data['password2']
-            email = email_1
+            email = email
             sex = register_form.cleaned_data['sex']
             institute = register_form.cleaned_data['institute']
             if password1 != password2:  # 判断两次密码是否相同
                 message = "两次输入的密码不同！"
-                return render(request, 'users/register_1.html', locals())
+                return redirect(reverse('users:register_1', kwargs={'name': name, 'email': email}))
             else:
                 same_name_user = models.User.objects.filter(name=username)
                 if same_name_user:  # 用户名唯一
                     message = '用户已经存在，请重新选择用户名！'
-                    return render(request, 'users/register_1.html', locals())
+                    return redirect(reverse('users:register_1', kwargs={'name': name, 'email': email}))
                 same_email_user = models.User.objects.filter(email=email)
                 if same_email_user:  # 邮箱地址唯一
                     message = '该邮箱地址已被注册，请使用别的邮箱！'
-                    return render(request, 'users/register_1.html', locals())
+                    return redirect(reverse('users:register_1', kwargs={'name': name, 'email': email}))
 
                 # 当一切都OK的情况下，创建新用户
-                new_user = models.User.objects.create()
+                new_user = User.objects.create()
                 new_user.name = username
                 new_user.password = hash_code(password1)  # 使用加密密码
                 new_user.email = email
@@ -154,9 +154,9 @@ def process(request):
     id_token = strResult['id_token']
     access_token = strResult['access_token']
     headers = {"Authorization": "Bearer {}".format(access_token)}
-    url = 'https://api.sjtu.edu.cn/v1/me/profile?access_token='+access_token
+    url = 'https://api.sjtu.edu.cn/v1/me/profile?access_token=' + access_token
     r = requests.request(url=url, method='GET', headers=headers, timeout=(20, 60))
-    entities=json.loads(r.text).get('entities')
+    entities = json.loads(r.text).get('entities')
     print(entities)
     for item in entities:
         name = item['name']
@@ -165,7 +165,7 @@ def process(request):
     if same_name_user:  # 用户名唯一
         return HttpResponseRedirect('http://127.0.0.1:8000/users/login/')
     else:
-        return HttpResponseRedirect('http://127.0.0.1:8000/users/register_1?name='+name+'&email='+email+'@sjtu.edu.cn')
+        return redirect(reverse('users:register_1', kwargs={'name': name, 'email': email + '@sjtu.edu.cn'}))
 
 
 def personalpage(request):
