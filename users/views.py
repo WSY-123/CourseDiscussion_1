@@ -100,7 +100,11 @@ def register_1(request, name, email):
                 new_user.sex = sex
                 new_user.institute = institute
                 new_user.save()
-                return redirect('users:login')  # 自动跳转到登录页面
+                user = models.User.objects.get(name=username)
+                request.session['is_login'] = True
+                request.session['user_id'] = user.id
+                request.session['user_name'] = user.name
+                return HttpResponseRedirect(reverse('home:homepage'))  # 自动跳转到登录页面
     register_form = RegisterForm()
     return render(request, 'users/register_1.html', locals())
 
